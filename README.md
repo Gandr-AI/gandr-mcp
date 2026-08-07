@@ -8,7 +8,7 @@ The official **Gandr MCP server** — text to speech inside any MCP-compatible a
 |---|---|
 | `synthesize` | Render text to speech (WAV, base64). Voices, sample rate 8000–48000, pitch and pacing dials |
 | `list_voices` | The six stock voices |
-| `get_usage` | Characters used vs quota for the configured key |
+| `get_usage` | Characters used by the configured key |
 
 ## Run
 
