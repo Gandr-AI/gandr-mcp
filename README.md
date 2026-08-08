@@ -1,12 +1,12 @@
 # gandr-mcp
 
-The official **Gandr MCP server** — text to speech inside any MCP-compatible agent (Claude Desktop, Cursor, and friends).
+The official **Gandr MCP server**, text to speech inside any MCP-compatible agent (Claude Desktop, Cursor, and friends).
 
 ## Tools
 
 | Tool | What it does |
 |---|---|
-| `synthesize` | Render text to speech (WAV, base64). Voices, sample rate 8000–48000, pitch and pacing dials |
+| `synthesize` | Render text to speech (WAV, base64). Voices, sample rate 8000-48000, pitch and pacing dials |
 | `list_voices` | The six stock voices |
 | `get_usage` | Characters used by the configured key |
 
