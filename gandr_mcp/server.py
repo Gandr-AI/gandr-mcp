@@ -4,15 +4,14 @@ Puts text-to-speech inside any MCP-compatible agent (Claude Desktop, Cursor,
 and friends) as three tools: synthesize, list_voices, get_usage.
 
 Run it:
-    pip install mcp
-    GANDR_API_KEY=gnd_... python server.py
+    pip install gandr-mcp
+    GANDR_API_KEY=gnd_... gandr-mcp
 
 Claude Desktop config:
     {
       "mcpServers": {
         "gandr": {
-          "command": "python",
-          "args": ["/path/to/server.py"],
+          "command": "gandr-mcp",
           "env": {"GANDR_API_KEY": "gnd_..."}
         }
       }
@@ -98,7 +97,12 @@ def get_usage() -> str:
         return f"error: {e}"
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Console entrypoint. Fails loudly rather than serving a keyless server."""
     if not KEY:
         raise SystemExit("GANDR_API_KEY is not set, get a key at https://gandr.ai")
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()

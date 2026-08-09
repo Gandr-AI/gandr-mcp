@@ -4,15 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gandr-mcp"
-version = "0.1.0"
+version = "0.1.1"
 description = "The official Gandr MCP server, text to speech inside any MCP-compatible agent"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name = "Gandr", email = "team@gandr.ai"}]
 keywords = ["mcp", "tts", "text-to-speech", "voice-ai", "agents"]
-dependencies = ["mcp>=1.0"]
+# The 1.x SDK is where FastMCP lives. mcp 2.0 removed it, so an
+# unbounded ">=1.0" resolves to 2.x and crashes on import.
+dependencies = ["mcp>=1.2,<2"]
+
+[project.scripts]
+gandr-mcp = "gandr_mcp.server:main"
 
 [project.urls]
 Homepage = "https://gandr.ai"
 Repository = "https://github.com/Gandr-AI/gandr-mcp"
+
+[tool.setuptools]
+packages = ["gandr_mcp"]
