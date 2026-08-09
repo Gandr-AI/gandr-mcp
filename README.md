@@ -32,3 +32,7 @@ Claude Desktop:
 ```
 
 Get a key at [gandr.ai](https://gandr.ai). Docs: [gandr.ai/docs](https://gandr.ai/docs).
+
+---
+
+mcp-name: io.github.Gandr-AI/gandr-mcp
