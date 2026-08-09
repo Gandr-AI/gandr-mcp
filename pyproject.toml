@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "gandr-mcp"
 version = "0.1.0"
-description = "The official Gandr MCP server — text to speech inside any MCP-compatible agent"
+description = "The official Gandr MCP server, text to speech inside any MCP-compatible agent"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}

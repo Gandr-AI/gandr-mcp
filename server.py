@@ -1,4 +1,4 @@
-"""gandr-mcp — the Gandr TTS MCP server.
+"""gandr-mcp, the Gandr TTS MCP server.
 
 Puts text-to-speech inside any MCP-compatible agent (Claude Desktop, Cursor,
 and friends) as three tools: synthesize, list_voices, get_usage.
@@ -65,7 +65,7 @@ def synthesize(
     if not text.strip():
         return "error: text must not be empty"
     if len(text) > 2000:
-        return "error: 2000-character request cap — split the text"
+        return "error: 2000-character request cap, split the text"
     body: dict = {
         "transcript": text,
         "language": "en",
@@ -100,5 +100,5 @@ def get_usage() -> str:
 
 if __name__ == "__main__":
     if not KEY:
-        raise SystemExit("GANDR_API_KEY is not set — get a key at https://gandr.ai")
+        raise SystemExit("GANDR_API_KEY is not set, get a key at https://gandr.ai")
     mcp.run()
