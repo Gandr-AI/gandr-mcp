@@ -61,6 +61,8 @@ def synthesize(
     gandr-mia. temperature: 0.1-1.2 pitch range (omit for the tuned default).
     cfg_weight: 0.2-1.0 pacing. sample_rate: 8000-48000.
     """
+    if not KEY:
+        return "error: GANDR_API_KEY is not set, get a key at https://gandr.ai"
     if not text.strip():
         return "error: text must not be empty"
     if len(text) > 2000:
@@ -91,6 +93,8 @@ def list_voices() -> str:
 @mcp.tool()
 def get_usage() -> str:
     """Characters used vs quota for the configured API key."""
+    if not KEY:
+        return "error: GANDR_API_KEY is not set, get a key at https://gandr.ai"
     try:
         return _call("/v1/usage", None).decode()
     except Exception as e:
@@ -98,9 +102,7 @@ def get_usage() -> str:
 
 
 def main() -> None:
-    """Console entrypoint. Fails loudly rather than serving a keyless server."""
-    if not KEY:
-        raise SystemExit("GANDR_API_KEY is not set, get a key at https://gandr.ai")
+    """Console entrypoint."""
     mcp.run()
 
 
