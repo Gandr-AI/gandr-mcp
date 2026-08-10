@@ -1,7 +1,7 @@
 """gandr-mcp, the Gandr TTS MCP server.
 
 Puts text-to-speech inside any MCP-compatible agent (Claude Desktop, Cursor,
-and friends) as three tools: synthesize, list_voices, get_usage.
+and friends) as four tools: synthesize, list_voices, list_languages, get_usage.
 
 Run it:
     pip install gandr-mcp
@@ -35,6 +35,15 @@ mcp = FastMCP("gandr")
 VOICES = ["gandr-ava", "gandr-dane", "gandr-jenny",
           "gandr-leo", "gandr-lewis", "gandr-mia"]
 
+LANGUAGES = {
+    "ar": "Arabic", "cs": "Czech", "da": "Danish", "de": "German",
+    "el": "Greek", "en": "English", "es": "Spanish", "fi": "Finnish",
+    "fr": "French", "hi": "Hindi", "it": "Italian", "ja": "Japanese",
+    "ko": "Korean", "nl": "Dutch", "no": "Norwegian", "pl": "Polish",
+    "pt": "Portuguese", "ro": "Romanian", "ru": "Russian", "sv": "Swedish",
+    "tr": "Turkish", "uk": "Ukrainian", "zh": "Chinese",
+}
+
 
 def _call(path: str, body: dict | None) -> bytes:
     req = urllib.request.Request(
@@ -51,6 +60,7 @@ def _call(path: str, body: dict | None) -> bytes:
 def synthesize(
     text: str,
     voice: str = "gandr-ava",
+    language: str = "en",
     sample_rate: int = 24000,
     temperature: float | None = None,
     cfg_weight: float | None = None,
@@ -58,8 +68,10 @@ def synthesize(
     """Render text to speech. Returns the WAV audio base64-encoded.
 
     voice: one of gandr-ava, gandr-dane, gandr-jenny, gandr-leo, gandr-lewis,
-    gandr-mia. temperature: 0.1-1.2 pitch range (omit for the tuned default).
-    cfg_weight: 0.2-1.0 pacing. sample_rate: 8000-48000.
+    gandr-mia. language: a two-letter code, call list_languages for the 23
+    supported. Any voice can speak any of them. temperature: 0.1-1.2 pitch
+    range (omit for the tuned default). cfg_weight: 0.2-1.0 pacing.
+    sample_rate: 8000-48000.
     """
     if not KEY:
         return "error: GANDR_API_KEY is not set, get a key at https://gandr.ai"
@@ -67,9 +79,12 @@ def synthesize(
         return "error: text must not be empty"
     if len(text) > 2000:
         return "error: 2000-character request cap, split the text"
+    if language not in LANGUAGES:
+        return (f"error: unsupported language {language!r}, "
+                f"call list_languages for the {len(LANGUAGES)} supported")
     body: dict = {
         "transcript": text,
-        "language": "en",
+        "language": language,
         "voice": {"mode": "id", "id": voice},
         "output_format": {"sample_rate": sample_rate},
     }
@@ -88,6 +103,13 @@ def synthesize(
 def list_voices() -> str:
     """List the available Gandr voices with their ids."""
     return "\n".join(VOICES)
+
+
+@mcp.tool()
+def list_languages() -> str:
+    """List the language codes synthesize accepts, with their names."""
+    return "\n".join(f"{code}\t{name}"
+                     for code, name in sorted(LANGUAGES.items()))
 
 
 @mcp.tool()
