@@ -6,26 +6,26 @@ The official **Gandr MCP server**, text to speech inside any MCP-compatible agen
 
 | Tool | What it does |
 |---|---|
-| `synthesize` | Render text to speech (WAV, base64). Voices, sample rate 8000-48000, pitch and pacing dials |
-| `list_voices` | The six stock voices |
-| `get_usage` | Characters used by the configured key |
+| `synthesize` | Render text to speech (WAV, base64). Voice, sample rate 8000-48000, pitch and pacing dials. |
+| `list_voices` | The six available voices. |
+| `get_usage` | Characters used by the configured key. |
 
-## Run
+## Install
 
 ```bash
-pip install mcp
-GANDR_API_KEY=gnd_... python server.py
+pip install gandr-mcp
 ```
 
-Claude Desktop:
+Claude Desktop (add to `claude_desktop_config.json`):
 
 ```json
 {
   "mcpServers": {
     "gandr": {
-      "command": "python",
-      "args": ["/path/to/server.py"],
-      "env": { "GANDR_API_KEY": "gnd_..." }
+      "command": "gandr-mcp",
+      "env": {
+        "GANDR_API_KEY": "gnd_..."
+      }
     }
   }
 }
