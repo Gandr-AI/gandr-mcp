@@ -1,12 +1,12 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Gandr-AI/gandr-mcp",
-  "description": "Text to speech for MCP clients. Reads numbers and dates correctly. 23 languages, watermarked.",
+  "description": "Text to speech for MCP clients. Reads numbers and dates correctly. Six voices, watermarked.",
   "repository": {
     "url": "https://github.com/Gandr-AI/gandr-mcp",
     "source": "github"
   },
-  "version": "0.1.3",
+  "version": "0.1.4",
   "websiteUrl": "https://gandr.ai",
   "packages": [
     {
@@ -14,7 +14,9 @@
       "registryBaseUrl": "https://pypi.org",
       "identifier": "gandr-mcp",
       "version": "0.1.2",
-      "transport": { "type": "stdio" },
+      "transport": {
+        "type": "stdio"
+      },
       "environmentVariables": [
         {
           "description": "Gandr API key, starts with gnd_. Free key at https://gandr.ai",
