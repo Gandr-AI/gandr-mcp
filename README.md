@@ -9,7 +9,7 @@ The official **Gandr MCP server**, text to speech inside any MCP-compatible agen
 | `synthesize` | Render text to speech (WAV, base64). Voice, language, sample rate 8000-48000, pitch and pacing dials. |
 | `list_voices` | The six available voices. |
 | `list_languages` | The 23 supported languages and their codes. |
-| `get_usage` | Characters used by the configured key. |
+| `get_usage` | Tokens used by the configured key. One token is one character. |
 
 ## Install
 

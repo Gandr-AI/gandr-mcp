@@ -114,7 +114,7 @@ def list_languages() -> str:
 
 @mcp.tool()
 def get_usage() -> str:
-    """Characters used vs quota for the configured API key."""
+    """Tokens used vs quota for the configured API key. One token is one character."""
     if not KEY:
         return "error: GANDR_API_KEY is not set, get a key at https://gandr.ai"
     try:
