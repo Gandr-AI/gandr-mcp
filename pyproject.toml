@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gandr-mcp"
-version = "0.1.5"
+version = "0.1.6"
 description = "The official Gandr MCP server, text to speech inside any MCP-compatible agent"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -13,7 +13,7 @@ authors = [{name = "Gandr", email = "team@gandr.ai"}]
 keywords = ["mcp", "tts", "text-to-speech", "voice-ai", "agents"]
 # The 1.x SDK is where FastMCP lives. mcp 2.0 removed it, so an
 # unbounded ">=1.0" resolves to 2.x and crashes on import.
-dependencies = ["mcp>=1.2,<2"]
+dependencies = ["mcp>=1.2,<1.8"]  # <1.8: mcp 1.8+ raises IncompleteFieldDefinitionWarning under warnings-as-errors, which fails Glama builds
 
 [project.scripts]
 gandr-mcp = "gandr_mcp.server:main"
