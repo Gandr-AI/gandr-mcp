@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Gandr-AI/gandr-mcp",
-  "description": "Gandr TTS: 146 ms client / 116 ms server warm first audio.",
+  "description": "Text to speech for MCP clients. 23 languages, six voices, every render watermarked.",
   "repository": {
     "url": "https://github.com/Gandr-AI/gandr-mcp",
     "source": "github"
