@@ -23,6 +23,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import urllib.error
 import urllib.request
 
 from mcp.server.fastmcp import FastMCP
@@ -52,8 +53,20 @@ def _call(path: str, body: dict | None) -> bytes:
         method="POST" if body is not None else "GET",
         headers={"x-api-key": KEY, "content-type": "application/json"},
     )
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return r.read()
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return r.read()
+    except urllib.error.HTTPError as e:
+        # the status line alone says nothing, the door's JSON body says why
+        try:
+            payload = json.loads(e.read())
+        except ValueError:
+            payload = None
+        if not isinstance(payload, dict) or "error" not in payload:
+            raise  # not the door's JSON, the status line is all there is
+        hint = payload.get("hint")
+        raise RuntimeError(f"[{e.code}] {payload['error']}"
+                           + (f", {hint}" if hint else "")) from None
 
 
 @mcp.tool()
