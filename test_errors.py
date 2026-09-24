@@ -11,6 +11,8 @@ def door(status, body, content_type="application/json"):
 
     class Handler(http.server.BaseHTTPRequestHandler):
         def answer(self):
+            # read the request body first, or closing the socket resets the client
+            self.rfile.read(int(self.headers.get("content-length") or 0))
             self.send_response(status)
             self.send_header("content-type", content_type)
             self.end_headers()
