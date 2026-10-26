@@ -2,7 +2,7 @@
 
 The official **Gandr MCP server**, text to speech inside any MCP-compatible agent (Claude Desktop, Cursor, and friends).
 
-[![smithery badge](https://smithery.ai/badge/gandr/gandr-mcp)](https://smithery.ai/servers/gandr/gandr-mcp)
+[![LightNow capabilities](https://lightnow.ai/badge/io.github.Gandr-AI/gandr-mcp)](https://lightnow.ai/servers/io.github.Gandr-AI/gandr-mcp)
 
 ## Tools
 
